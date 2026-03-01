@@ -1,5 +1,5 @@
 import { data } from 'react-router-dom';
-import foodModel from '../models/foodModels.js';
+import foodModel from '../models/foodModel.js';
 import fs from 'fs';
 import { log } from 'console';
 
@@ -17,7 +17,7 @@ const addFood = async (req, res) => {
 
   try {
     await food.save();
-    res.json({ success: true, message: 'Food added' });
+    res.json({ success: true, message: 'Food Added' });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -35,4 +35,18 @@ const listFood = async (req, res) => {
   }
 };
 
-export { addFood, listFood };
+// Remove food item
+const removeFood = async (req, res) => {
+  try {
+    const food = await foodModel.findById(req.body.id);
+    fs.unlink(`uploads/${food.image}`, () => {});
+
+    await foodModel.findByIdAndDelete(req.body.id);
+    res.json({ success: true, message: 'Food Removed' });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export { addFood, listFood, removeFood };
