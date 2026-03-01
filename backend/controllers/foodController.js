@@ -1,0 +1,38 @@
+import { data } from 'react-router-dom';
+import foodModel from '../models/foodModels.js';
+import fs from 'fs';
+import { log } from 'console';
+
+// Add food item
+const addFood = async (req, res) => {
+  let image_filename = `${req.file.filename}`;
+
+  const food = new foodModel({
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    category: req.body.category,
+    image: image_filename,
+  });
+
+  try {
+    await food.save();
+    res.json({ success: true, message: 'Food added' });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// All food list
+const listFood = async (req, res) => {
+  try {
+    const foods = await foodModel.find({});
+    res.json({ success: true, data: foods });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export { addFood, listFood };
