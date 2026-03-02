@@ -7,7 +7,7 @@ import { StoreContext } from '../../context/StoreContext';
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState('home');
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const logout = () => {
     sessionStorage.removeItem('token');
@@ -25,30 +25,41 @@ const Navbar = ({ setShowLogin }) => {
         />
       </Link>
       <ul className='navbar-menu'>
-        <Link
-          to='/'
-          onClick={() => setMenu('home')}
+        <li
+          onClick={() => {
+            setMenu('home');
+            navigate('/');
+          }}
           className={menu === 'home' ? 'active' : ''}>
           home
-        </Link>
-        <a
-          href='#explore-menu'
-          onClick={() => setMenu('menu')}
+        </li>
+
+        <li
+          onClick={() => {
+            setMenu('menu');
+            navigate('/#explore-menu');
+          }}
           className={menu === 'menu' ? 'active' : ''}>
           menu
-        </a>
-        <a
-          href='#app-download'
-          onClick={() => setMenu('mobile-app')}
+        </li>
+
+        <li
+          onClick={() => {
+            setMenu('mobile-app');
+            navigate('/#app-download');
+          }}
           className={menu === 'mobile-app' ? 'active' : ''}>
           mobile-app
-        </a>
-        <a
-          href='#footer'
-          onClick={() => setMenu('contact-us')}
+        </li>
+
+        <li
+          onClick={() => {
+            setMenu('contact-us');
+            navigate('/#footer');
+          }}
           className={menu === 'contact-us' ? 'active' : ''}>
           contact us
-        </a>
+        </li>
       </ul>
       <div className='navbar-right'>
         <img
@@ -73,7 +84,7 @@ const Navbar = ({ setShowLogin }) => {
               alt=''
             />
             <ul className='navbar-profile-dropdown'>
-              <li>
+              <li onClick={() => navigate('/myorders')}>
                 <img
                   src={assets.bag_icon}
                   alt=''

@@ -4,15 +4,18 @@ import {
   listFood,
   removeFood,
 } from '../controllers/foodController.js';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import multer from 'multer';
 
 const foodRouter = express.Router();
 
 // Image Storage Engineer
-const storage = multer.diskStorage({
-  destination: 'uploads',
-  filename: (req, file, cb) => {
-    return cb(null, `${Date.now()}${file.originalname}`);
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'food-images',
+    allowed_formats: ['jpg', 'png', 'jpeg'],
   },
 });
 
