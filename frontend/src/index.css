@@ -7,13 +7,20 @@
   font-family: Outfit;
   scroll-behavior: smooth;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   min-height: 100vh;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 .app {
   width: 80%;
   margin: auto;
