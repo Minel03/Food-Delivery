@@ -30,6 +30,7 @@ const Cart = () => {
                   <img
                     src={item.image}
                     alt=''
+                    crossOrigin='anonymous'
                   />
                   <p>{item.name}</p>
                   <p>${item.price}</p>
