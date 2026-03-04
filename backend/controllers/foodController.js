@@ -35,18 +35,8 @@ const listFood = async (req, res) => {
 // Remove food
 const removeFood = async (req, res) => {
   try {
-    const food = await foodModel.findById(req.body.id);
-
-    if (food.imageId) {
-      // Extract just the public_id from the full URL if needed
-      const publicId = food.imageId.includes('/')
-        ? food.imageId
-        : `food-images/${food.imageId}`;
-
-      await cloudinary.uploader.destroy(publicId);
-    }
-
     await foodModel.findByIdAndDelete(req.body.id);
+
     res.json({ success: true, message: 'Food Removed' });
   } catch (error) {
     console.log(error);
