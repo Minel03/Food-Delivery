@@ -116,10 +116,6 @@ export const menu_list = [
     menu_name: 'Noodles',
     menu_image: menu_8,
   },
-  {
-    menu_name: 'Rice Meal',
-    menu_image: menu_9,
-  },
 ];
 
 export const food_list = [
